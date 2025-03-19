@@ -1,26 +1,37 @@
 import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
+import { Label } from '@radix-ui/react-label';
 import { Check } from 'lucide-react';
 import * as React from 'react';
 
+import { Show } from '@/components/ui/Utilities';
 import { cn } from '@/lib/utils';
 
-const Checkbox = React.forwardRef<
-  React.ElementRef<typeof CheckboxPrimitive.Root>,
-  React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root>
->(({ className, ...props }, ref) => (
-  <CheckboxPrimitive.Root
-    ref={ref}
-    className={cn(
-      'ring-offset-background focus-visible:ring-ring data-[state=checked]:text-primary data-[state=checked]:bg-secondary peer h-4 w-4 shrink-0 rounded-sm border border-gray-300 bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
-      className
-    )}
-    {...props}
-  >
-    <CheckboxPrimitive.Indicator className={cn('flex items-center justify-center text-current')}>
-      <Check className="h-4 w-4 text-white" />
-    </CheckboxPrimitive.Indicator>
-  </CheckboxPrimitive.Root>
-));
+interface Props extends React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root> {
+  label?: string;
+  labelClassName?: string;
+}
+
+const Checkbox = React.forwardRef<React.ElementRef<typeof CheckboxPrimitive.Root>, Props>(
+  ({ className, labelClassName, ...props }, ref) => (
+    <div>
+      <CheckboxPrimitive.Root
+        ref={ref}
+        className={cn(
+          'ring-offset-background focus-visible:ring-ring data-[state=checked]:text-primary data-[state=checked]:bg-primary peer h-4 w-4 shrink-0 rounded-sm border border-gray-300 bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
+          className
+        )}
+        {...props}
+      >
+        <CheckboxPrimitive.Indicator className={cn('flex items-center justify-center text-current')}>
+          <Check className="h-4 w-4 text-white" />
+        </CheckboxPrimitive.Indicator>
+      </CheckboxPrimitive.Root>
+      <Show when={!!props.label}>
+        <Label className={labelClassName}>{props.label}</Label>
+      </Show>
+    </div>
+  )
+);
 Checkbox.displayName = CheckboxPrimitive.Root.displayName;
 
 export { Checkbox };

@@ -12,16 +12,23 @@ interface Props<T extends FieldValues = FieldValues> extends InputProps {
   defaultValue?: FieldPathValue<T, FieldPath<T>>;
   label?: string;
   labelClassName?: string;
+  inputClassName?: string;
+  error?: any;
+  size?: any;
   required?: boolean;
 }
 
 const TextField = <T extends FieldValues>({
   className,
+  inputClassName,
   labelClassName,
   control,
   defaultValue,
   label,
   required,
+  error,
+  size,
+  variant,
   ...props
 }: Props<T>) => {
   return (
@@ -32,13 +39,19 @@ const TextField = <T extends FieldValues>({
       render={({ field }) => (
         <FormItem>
           <FormControl>
-            <div>
+            <div className={className}>
               <Show when={!!label}>
                 <FormLabel className={labelClassName}>
                   {label} {required && <span className="text-error-light">*</span>}
                 </FormLabel>
               </Show>
-              <Input {...field} {...props} className={className} />
+              <Input
+                {...field}
+                {...props}
+                variant={error ? 'error' : variant || 'default'}
+                size={size}
+                className={inputClassName}
+              />
               <FormMessage className="mt-1 text-xs" />
             </div>
           </FormControl>

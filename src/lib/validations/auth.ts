@@ -48,7 +48,6 @@ export const registerSchema = z
     firstName: z.string().nonempty(validationMessages.required('First name')),
     lastName: z.string().nonempty(validationMessages.required('Last name')),
     email: z.string().nonempty(validationMessages.required('Email')).email(validationMessages.invalid('Email')),
-    company: z.string().nonempty(validationMessages.required('Company code')),
     password: z
       .string()
       .nonempty(validationMessages.required('Password'))
