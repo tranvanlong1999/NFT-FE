@@ -7,6 +7,13 @@ export const ROUTE = {
   PROFILE: '/profile',
   SUPPORT: '/support',
   SUPPORT_NEW: '/support_new',
+  ABOUT: '/about',
+  EXPLORER: '/explorer',
+  PAGES: '/pages',
+  OTHERS: '/others',
+  BLOGS: '/blogs',
+  CONTACT: '/contact',
+  FORGOT_PASSWORD: '/forgot-password',
 } as const;
 
 export type ROUTE_KEY = keyof typeof ROUTE;
