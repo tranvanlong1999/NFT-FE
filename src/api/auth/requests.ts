@@ -18,7 +18,7 @@ import type {
 
 export const loginRequest = async (params: ILoginParams): Promise<ILoginResponse> => {
   const { data } = await request({
-    url: '/authentication/log-in',
+    url: '/auth/email/login',
     method: 'POST',
     data: params,
   });
@@ -46,7 +46,7 @@ export const refetchTokenRequest = async (): Promise<ILoginResponse> => {
 
 export const registerRequest = async (params: IRegisterParams): Promise<IRegisterResponse> => {
   const { data } = await request({
-    url: '/authentication/register',
+    url: '/auth/email/register',
     method: 'POST',
     data: params,
   });

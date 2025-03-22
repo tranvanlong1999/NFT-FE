@@ -9,7 +9,7 @@ import { ROUTE } from '@/types';
 import { refreshTokenRequest } from './auth';
 
 export const request = axios.create({
-  baseURL: env.API_URL,
+  baseURL: `${env.API_URL}/api/v1`,
 });
 
 const onRefreshToken = async () => {

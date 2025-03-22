@@ -37,11 +37,12 @@ export const inputVariants = cva(
       background: {
         search: 'bg-neutral-80',
         searchMobile: 'bg-neutral-80',
-        default: 'bg-black',
+        default: 'bg-neutral-50',
       },
     },
     defaultVariants: {
       size: 'default',
+      background: 'default',
     },
   }
 );
