@@ -50,6 +50,8 @@ export interface ButtonProps
   loading?: boolean;
   fullWidth?: boolean;
   blur?: boolean;
+  leftIcon?: React.ReactNode;
+  rightIcon?: React.ReactNode;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -65,6 +67,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       loading,
       blur = true,
       children,
+      leftIcon,
+      rightIcon,
       ...props
     },
     ref
@@ -83,7 +87,13 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           children
         ) : (
           <>
-            {!loading && children}
+            {!loading && (
+              <div className="flex items-center justify-center gap-2">
+                {leftIcon && <span className="mr-2">{leftIcon}</span>}
+                {children}
+                {rightIcon && <span className="ml-2">{rightIcon}</span>}
+              </div>
+            )}
             {loading && <Spinner className="ml-4" />}
             {blur && (
               <span
