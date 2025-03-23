@@ -14,6 +14,7 @@ import { VStack } from '@/components/ui/Utilities';
 import { loginSchema } from '@/lib/validations/auth';
 import { type ILoginParams } from '@/api/auth/types';
 import { loginRequest } from '@/api/auth';
+import { env } from '@/lib/const';
 
 interface LoginFormProps {
   setActiveForm: (form: 'register' | 'login') => void;
@@ -54,8 +55,39 @@ const LoginForm: React.FC<LoginFormProps> = ({ setActiveForm }) => {
   };
 
   const handleGoogleLogin = () => {
-    // Implement Google login logic
-    toast.info('Google login coming soon');
+    // Open Google OAuth popup
+    const width = 500;
+    const height = 600;
+    const left = window.screen.width / 2 - width / 2;
+    const top = window.screen.height / 2 - height / 2;
+
+    const popup = window.open(
+      `${env.API_URL}/api/v1/auth-google-passport/login`,
+      'Google Login',
+      `width=${width},height=${height},left=${left},top=${top}`
+    );
+
+    // Listen for message from popup
+    window.addEventListener('message', async (event) => {
+      if (event.origin !== env.API_URL) return;
+
+      if (event.data.type === 'GOOGLE_LOGIN_SUCCESS') {
+        const { accessToken, refreshToken } = event.data;
+        
+        // Store tokens
+        localStorage.setItem('accessToken', accessToken);
+        if (refreshToken) {
+          localStorage.setItem('refreshToken', refreshToken);
+        }
+        
+        toast.success('Login successful!');
+        // Close popup
+        popup?.close();
+      } else if (event.data.type === 'GOOGLE_LOGIN_ERROR') {
+        toast.error('Google login failed. Please try again.');
+        popup?.close();
+      }
+    });
   };
 
   const handleTwitterLogin = () => {
