@@ -1,20 +1,19 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useMutation } from '@tanstack/react-query';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
-import { useMutation } from '@tanstack/react-query';
 
-import { Icons } from '@/assets/icons';
+import { registerRequest } from '@/api/auth';
+import { type IRegisterParams } from '@/api/auth/types';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { FormWrapper } from '@/components/ui/form';
 import { TextField } from '@/components/ui/FormField';
 import { VStack } from '@/components/ui/Utilities';
 import { registerSchema } from '@/lib/validations/auth';
-import { type IRegisterParams } from '@/api/auth/types';
-import { registerRequest } from '@/api/auth';
 
 interface RegisterFormData extends Omit<IRegisterParams, 'confirmPassword'> {
   confirmPassword: string;
@@ -45,7 +44,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ setActiveForm }) => {
       toast.success('Registration successful!');
       console.log('Registration response:', response);
     },
-    onError: (error) => {
+    onError: () => {
       toast.error('Registration failed. Please try again.');
       console.error('Registration error:', error);
     },

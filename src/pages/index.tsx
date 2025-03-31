@@ -1,6 +1,6 @@
-import { Button } from '@/components/ui/button';
-import { round } from 'lodash';
 import { useRouter } from 'next/router';
+
+import { Button } from '@/components/ui/button';
 
 const HomePage = () => {
   const router = useRouter();
