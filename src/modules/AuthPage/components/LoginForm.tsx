@@ -1,20 +1,20 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useMutation } from '@tanstack/react-query';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
-import { useMutation } from '@tanstack/react-query';
 
+import { loginRequest } from '@/api/auth';
+import { type ILoginParams } from '@/api/auth/types';
 import { Icons } from '@/assets/icons';
 import { Button } from '@/components/ui/button';
 import { FormWrapper } from '@/components/ui/form';
 import { TextField } from '@/components/ui/FormField';
 import { VStack } from '@/components/ui/Utilities';
-import { loginSchema } from '@/lib/validations/auth';
-import { type ILoginParams } from '@/api/auth/types';
-import { loginRequest } from '@/api/auth';
 import { env } from '@/lib/const';
+import { loginSchema } from '@/lib/validations/auth';
 
 interface LoginFormProps {
   setActiveForm: (form: 'register' | 'login') => void;
@@ -44,7 +44,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ setActiveForm }) => {
         toast.success('Login successful!');
       }
     },
-    onError: (error) => {
+    onError: () => {
       toast.error('Login failed. Please check your credentials and try again.');
       console.error('Login error:', error);
     },
@@ -55,39 +55,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ setActiveForm }) => {
   };
 
   const handleGoogleLogin = () => {
-    // Open Google OAuth popup
-    const width = 500;
-    const height = 600;
-    const left = window.screen.width / 2 - width / 2;
-    const top = window.screen.height / 2 - height / 2;
-
-    const popup = window.open(
-      `${env.API_URL}/api/v1/auth-google-passport/login`,
-      'Google Login',
-      `width=${width},height=${height},left=${left},top=${top}`
-    );
-
-    // Listen for message from popup
-    window.addEventListener('message', async (event) => {
-      if (event.origin !== env.API_URL) return;
-
-      if (event.data.type === 'GOOGLE_LOGIN_SUCCESS') {
-        const { accessToken, refreshToken } = event.data;
-        
-        // Store tokens
-        localStorage.setItem('accessToken', accessToken);
-        if (refreshToken) {
-          localStorage.setItem('refreshToken', refreshToken);
-        }
-        
-        toast.success('Login successful!');
-        // Close popup
-        popup?.close();
-      } else if (event.data.type === 'GOOGLE_LOGIN_ERROR') {
-        toast.error('Google login failed. Please try again.');
-        popup?.close();
-      }
-    });
+    window.location.href = `${env.API_URL}/api/v1/auth/google/login`;
   };
 
   const handleTwitterLogin = () => {
@@ -102,7 +70,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ setActiveForm }) => {
         className="text-base text-white mb-10 underline hover:cursor-pointer transition-all duration-300 hover:scale-[1.02]"
         onClick={() => setActiveForm('register')}
       >
-        Don't have an account? Sign Up
+        Don&apos;t have an account? Sign Up
       </p>
       <FormWrapper form={form} onSubmit={onSubmit} className={'my-8 md:mx-0'}>
         <VStack spacing={24}>

@@ -1,10 +1,12 @@
 'use client';
 
 import React, { useState } from 'react';
-import RegisterForm from './components/RegisterForm';
-import LoginForm from './components/LoginForm';
-import { type NextPageWithLayout, ROUTE } from '@/types';
+
 import Breadcrumb from '@/components/Breadcrumb';
+import { type NextPageWithLayout, ROUTE } from '@/types';
+
+import LoginForm from './components/LoginForm';
+import RegisterForm from './components/RegisterForm';
 
 const AuthPage: NextPageWithLayout = () => {
   const [activeForm, setActiveForm] = useState<'register' | 'login'>('login');
