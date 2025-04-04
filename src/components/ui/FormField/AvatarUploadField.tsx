@@ -45,7 +45,7 @@ const AvatarUploadField = <T extends FieldValues>({
               <Avatar src={img} className={cn('border-neutral-10 border-3 h-40 w-40', className)} />
               <button
                 type="button"
-                className="border-neutral-10 bg-neon-grad-1 absolute bottom-0 left-1/2 flex h-10 w-10 -translate-x-1/2 items-center justify-center rounded-full border-2"
+                className="border-neutral-10 bg-neutral-801 absolute bottom-[2rem] left-1/2 flex h-10 w-10 -translate-x-1/2 items-center justify-center rounded-full border-2"
                 onClick={() => ref.current?.click()}
               >
                 <Icons.camera />

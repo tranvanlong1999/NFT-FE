@@ -5,3 +5,9 @@ export const env = {
 };
 
 export const isServer = typeof window === 'undefined';
+
+export const SETTING_TYPE = {
+  PROFILE: 1,
+  LINKS: 2,
+  NOTIFICATIONS: 3,
+};
