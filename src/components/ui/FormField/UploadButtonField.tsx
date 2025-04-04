@@ -5,8 +5,7 @@ import type { Control, FieldPath, FieldPathValue, FieldValues } from 'react-hook
 import { Icons } from '@/assets/icons';
 import { type MIME_TYPE } from '@/lib/mime';
 
-import type { ButtonProps } from '../button';
-import { Button } from '../button';
+import { Button, type ButtonProps } from '../button';
 import { FormControl, FormField, FormItem, FormMessage } from '../form';
 import { HStack, Show, VStack } from '../Utilities';
 

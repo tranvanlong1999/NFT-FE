@@ -16,7 +16,11 @@ const buttonVariants = cva(
         primary: 'text-black bg-green-grad-1 border border-neon-400 hover:bg-primary/90',
         secondary: 'text-neutral-900 bg-black border border-neutral-300 hover:bg-yellow-500/90',
         disable: 'text-neutral-500 bg-neutral-grad-3 border border-neutral-300',
-        ghost: 'text-neutral-900 hover:bg-neutral-200',
+        ghost: 'text-neutral-902 hover:text-yellow-500 bg-neutral-801',
+        yellow: 'text-black hover:cursor-pointer hover:bg-green-500 bg-yellow-500 border border-neutral-300',
+        normal:
+          'text-neutral-902 hover:cursor-pointer bg-neutral-801 hover:cursor-pointer ' +
+          'hover:outline-none border border-neutral-300 hover:text-yellow-500',
       },
       rounded: {
         default: 'rounded-sm',
@@ -33,6 +37,9 @@ const buttonVariants = cva(
         md: 'h-[1.5rem]',
         xs: 'h-[2rem]',
         lg: 'h-[2.5rem]',
+        sm: 'h-[3rem]',
+        xl: 'h-[4rem]',
+        xxl: 'h-[5rem]',
       },
     },
     defaultVariants: {
